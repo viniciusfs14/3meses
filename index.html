@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🌻 Girassol do Amor</title>
   <style>
     body {
@@ -10,13 +11,18 @@
       text-align: center;
       color: white;
       height: 100vh;
+      overflow-x: hidden;
+      font-size: 1rem;
+      padding: 0 1rem;
       transition: background 1s ease;
     }
 
     h2 {
-      font-size: 28px;
-      padding-top: 30px;
+      font-size: 1.6rem;
+      padding-top: 2rem;
       margin: 0;
+      word-wrap: break-word;
+      max-width: 90vw;
     }
 
     #container {
@@ -26,8 +32,9 @@
     }
 
     svg {
-      width: 200px;
-      height: 300px;
+      width: 60vw;
+      height: auto;
+      max-width: 300px;
       margin-top: 20px;
     }
 
@@ -42,8 +49,10 @@
     }
 
     #dias {
-      margin-top: 30px;
-      font-size: 20px;
+      position: absolute;
+      bottom: 30px;
+      width: 100%;
+      font-size: 1.2rem;
     }
 
     #ceu {
@@ -59,8 +68,8 @@
 
     #astro {
       position: absolute;
-      top: 50px;
-      left: 50px;
+      top: 5vh;
+      left: 5vw;
       width: 100px;
       height: 100px;
       border-radius: 50%;
@@ -68,12 +77,7 @@
       box-shadow: 0 0 30px 10px rgba(255, 255, 0, 0.4);
       transition: background 1s ease, box-shadow 1s ease;
     }
-    #dias {
-      position: absolute;
-      bottom: 30px;
-      width: 100%;
-      font-size: 20px;
-    }
+
     .estrela {
       fill: white;
       opacity: 0;
@@ -94,6 +98,16 @@
       100% { transform: translateX(110vw) translateY(-20px); }
     }
 
+    @media (max-width: 500px) {
+      #dias {
+        font-size: 1rem;
+        bottom: 20px;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -103,14 +117,10 @@
   <div id="container">
     <svg viewBox="0 0 200 300">
       <g id="girassol">
-        <!-- Caule -->
         <rect x="95" y="140" width="10" height="130" fill="green" />
-
-        <!-- Folhas -->
         <ellipse cx="80" cy="200" rx="20" ry="10" fill="limegreen" />
         <ellipse cx="120" cy="220" rx="20" ry="10" fill="limegreen" />
 
-        <!-- Pétalas -->
         <g id="petalas">
           <circle cx="100" cy="100" r="40" fill="gold" />
           <circle cx="100" cy="60" r="20" fill="gold" />
@@ -123,27 +133,19 @@
           <circle cx="70" cy="70" r="20" fill="gold" />
         </g>
 
-        <!-- Miolo -->
         <circle cx="100" cy="100" r="20" fill="saddlebrown" />
-
-        <!-- Sol -->
         <circle id="sol" r="20" fill="gold" style="display:none;" />
-
-        <!-- Lua -->
         <circle id="lua" r="15" fill="#ccc" style="display:none;" />
 
-        <!-- Estrelas -->
         <circle class="estrela" cx="20" cy="30" r="1" />
         <circle class="estrela" cx="160" cy="60" r="1.5" />
         <circle class="estrela" cx="90" cy="50" r="1.2" />
         <circle class="estrela" cx="120" cy="20" r="1" />
 
-        <!-- Pássaros -->
         <g id="passaros" style="display:none;">
-        <path d="M10 10 Q 15 5, 20 10" fill="none" stroke="white" stroke-width="1" class="passaro" />
-        <path d="M30 20 Q 35 15, 40 20" fill="none" stroke="white" stroke-width="1" class="passaro" />
-
-      </g>
+          <path d="M10 10 Q 15 5, 20 10" fill="none" stroke="white" stroke-width="1" class="passaro" />
+          <path d="M30 20 Q 35 15, 40 20" fill="none" stroke="white" stroke-width="1" class="passaro" />
+        </g>
       </g>
     </svg>
 
@@ -151,7 +153,6 @@
   </div>
 
   <script>
-    // Dias de namoro
     const dataInicio = new Date("2025-01-17");
     const hoje = new Date();
     const diffDias = Math.floor((hoje - dataInicio) / (1000 * 60 * 60 * 24));
@@ -161,41 +162,28 @@
     girassol.setAttribute("transform", `translate(100,150) scale(${escala}) translate(-100,-150)`);
     document.getElementById("dias").textContent = `✨ ${diffDias} dias ao lado da minha flor favorita ✨`;
 
-    // Fundo dinâmico por horário
     const hora = hoje.getHours();
     const ceu = document.getElementById("ceu");
     const astro = document.getElementById("astro");
 
-    // Sol e lua
     const sol = document.getElementById("sol");
     const lua = document.getElementById("lua");
     const estrelas = document.querySelectorAll(".estrela");
-    const passaros = document.getElementById("passaros"); 
-
-    function moverAstro(el, progresso) {
-      const cx = 50 + progresso * 100;
-      const cy = 100 - Math.sin(progresso * Math.PI) * 60;
-      el.setAttribute("cx", cx);
-      el.setAttribute("cy", cy);
-    }
+    const passaros = document.getElementById("passaros");
 
     if (hora >= 6 && hora < 17) {
-      // Dia
       ceu.style.background = "linear-gradient(to top, #87ceeb, #fefbd8)";
       astro.style.background = "yellow";
       astro.style.boxShadow = "0 0 30px 10px rgba(255,255,0,0.4)";
-
       estrelas.forEach(e => e.style.display = "none");
       passaros.style.display = "block";
     } else if (hora >= 17 && hora < 18) {
-      // Tarde / pôr do sol
       ceu.style.background = "linear-gradient(to bottom, #FFA07A, #FFDAB9)";
       astro.style.background = "orange";
       astro.style.boxShadow = "0 0 40px 10px rgba(255,165,0,0.3)";
-      passaros.style.display = "block";
       estrelas.forEach(e => e.style.display = "none");
+      passaros.style.display = "block";
     } else {
-      // Noite
       ceu.style.background = "linear-gradient(to top, #0b0c2a, #000)";
       astro.style.background = "white";
       astro.style.boxShadow = "0 0 30px 10px rgba(255,255,255,0.3)";
