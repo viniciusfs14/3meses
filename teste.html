@@ -146,7 +146,7 @@
       el.setAttribute("cy", cy);
     }
 
-    if (hora >= 6 && hora < 18) {
+    if (hora >= 6 && hora < 17) {
       const progresso = (hora - 6) / 12;
       sol.style.display = "block";
       moverAstro(sol, progresso);
@@ -154,7 +154,7 @@
       estrelas.forEach(e => e.style.display = "none");
       document.body.style.background = "linear-gradient(to top, #87ceeb, #fefbd8)";
     } else {
-      const progresso = hora >= 18 ? (hora - 18) / 12 : (hora + 6) / 12;
+      const progresso = hora >= 17 ? (hora - 18) / 12 : (hora + 6) / 12;
       lua.style.display = "block";
       moverAstro(lua, progresso);
       estrelas.forEach(e => e.style.display = "block");
@@ -164,3 +164,5 @@
   </script>
 </body>
 </html>
+
+
