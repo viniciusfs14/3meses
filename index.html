@@ -43,14 +43,19 @@
       animation: balanco 3s ease-in-out infinite;
     }
 
-    #gramado {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100vw;
-    height: 12vh;
-    z-index: 0;
+    #gramado-container {
+    position: relative;
+    width: 100%;
+    height: 80px;
+    margin-top: -120px;
+    z-index: 1;
     }
+
+    #gramado {
+    width: 100%;
+    height: 100%;
+    }
+
 
     @keyframes balanco {
       0%, 100% { transform: rotate(1deg); }
@@ -161,9 +166,11 @@
     <div id="dias"></div>
   </div>
 
+  <div id="gramado-container">
     <svg id="gramado" viewBox="0 0 100 20" preserveAspectRatio="none">
-        <path d="M0 10 Q 25 0, 50 10 T 100 10 V20 H0 Z" fill="limegreen"/>
+      <path d="M0 10 Q 25 0, 50 10 T 100 10 V20 H0 Z" fill="limegreen"/>
     </svg>
+  </div>
   
 
   <script>
