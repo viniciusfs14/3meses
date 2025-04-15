@@ -43,6 +43,15 @@
       animation: balanco 3s ease-in-out infinite;
     }
 
+    #gramado {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 12vh;
+    z-index: 0;
+    }
+
     @keyframes balanco {
       0%, 100% { transform: rotate(1deg); }
       50% { transform: rotate(-1deg); }
@@ -151,6 +160,11 @@
 
     <div id="dias"></div>
   </div>
+
+    <svg id="gramado" viewBox="0 0 100 20" preserveAspectRatio="none">
+        <path d="M0 10 Q 25 0, 50 10 T 100 10 V20 H0 Z" fill="limegreen"/>
+    </svg>
+  
 
   <script>
     const dataInicio = new Date("2025-01-17");
