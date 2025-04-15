@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>🌻 Girassol do Amor</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      color: white;
+      height: 100vh;
+      transition: background 1s ease;
+    }
+
+    h2 {
+      font-size: 28px;
+      padding-top: 30px;
+      margin: 0;
+    }
+
+    #container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    svg {
+      width: 200px;
+      height: 300px;
+      margin-top: 20px;
+    }
+
+    #girassol {
+      transform-origin: center bottom;
+      animation: balanco 3s ease-in-out infinite;
+    }
+
+    @keyframes balanco {
+      0%, 100% { transform: rotate(1deg); }
+      50% { transform: rotate(-1deg); }
+    }
+
+    #dias {
+      margin-top: 30px;
+      font-size: 20px;
+    }
+
+    #ceu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      background: linear-gradient(#87CEEB, #ffffff);
+      transition: background 1s ease;
+    }
+
+    #astro {
+      position: absolute;
+      top: 50px;
+      left: 50px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: yellow;
+      box-shadow: 0 0 30px 10px rgba(255, 255, 0, 0.4);
+      transition: background 1s ease, box-shadow 1s ease;
+    }
+  </style>
+</head>
+<body>
+  <div id="ceu"><div id="astro"></div></div>
+
+  <h2>🌻 Girassol do Amor</h2>
+  <div id="container">
+    <svg viewBox="0 0 200 300">
+      <g id="girassol">
+        <!-- Caule -->
+        <rect x="95" y="140" width="10" height="130" fill="green" />
+
+        <!-- Folhas -->
+        <ellipse cx="80" cy="200" rx="20" ry="10" fill="limegreen" />
+        <ellipse cx="120" cy="220" rx="20" ry="10" fill="limegreen" />
+
+        <!-- Pétalas -->
+        <g id="petalas">
+          <circle cx="100" cy="100" r="40" fill="gold" />
+          <circle cx="100" cy="60" r="20" fill="gold" />
+          <circle cx="130" cy="70" r="20" fill="gold" />
+          <circle cx="140" cy="100" r="20" fill="gold" />
+          <circle cx="130" cy="130" r="20" fill="gold" />
+          <circle cx="100" cy="140" r="20" fill="gold" />
+          <circle cx="70" cy="130" r="20" fill="gold" />
+          <circle cx="60" cy="100" r="20" fill="gold" />
+          <circle cx="70" cy="70" r="20" fill="gold" />
+        </g>
+
+        <!-- Miolo -->
+        <circle cx="100" cy="100" r="20" fill="saddlebrown" />
+      </g>
+    </svg>
+
+    <div id="dias"></div>
+  </div>
+
+  <script>
+    // Dias de namoro
+    const dataInicio = new Date("2025-01-17");
+    const hoje = new Date();
+    const diffDias = Math.floor((hoje - dataInicio) / (1000 * 60 * 60 * 24));
+    const escala = Math.min(1 + diffDias * 0.01, 2.5);
+
+    const girassol = document.getElementById("girassol");
+    girassol.setAttribute("transform", `translate(100,150) scale(${escala}) translate(-100,-150)`);
+    document.getElementById("dias").textContent = `✨ ${diffDias} dias ao lado da minha flor favorita ✨`;
+
+    // Fundo dinâmico por horário
+    const hora = hoje.getHours();
+    const ceu = document.getElementById("ceu");
+    const astro = document.getElementById("astro");
+
+    if (hora >= 6 && hora < 17) {
+      // Dia
+      ceu.style.background = "linear-gradient(#87CEEB, #ffffff)";
+      astro.style.background = "yellow";
+      astro.style.boxShadow = "0 0 30px 10px rgba(255,255,0,0.4)";
+    } else if (hora >= 17 && hora < 19) {
+      // Tarde / pôr do sol
+      ceu.style.background = "linear-gradient(#FFA07A, #FFDAB9)";
+      astro.style.background = "orange";
+      astro.style.boxShadow = "0 0 40px 10px rgba(255,165,0,0.3)";
+    } else {
+      // Noite
+      ceu.style.background = "linear-gradient(#0D1B2A, #1B263B)";
+      astro.style.background = "white";
+      astro.style.boxShadow = "0 0 30px 10px rgba(255,255,255,0.3)";
+    }
+  </script>
+</body>
+</html>
