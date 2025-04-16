@@ -277,6 +277,15 @@
   text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.5);
 }
 
+h2 {
+      font-size: 1.8rem;
+      margin: 0;
+      padding-top: 1.5rem;
+      font-family: 'Comic Sans MS', cursive;
+      color: #FFD700;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
 
 </style>
 </head>
@@ -503,48 +512,7 @@
     fotoAtual = (fotoAtual + 1) % fotos.length;
     trocarFoto(fotoAtual);
   });
-
-  function agendarNotificacao() {
-    const agora = new Date();
-    const horarioDesejado = new Date();
-
-    horarioDesejado.setHours(16, 13, 0, 0); // 16h30
-
-    if (agora > horarioDesejado) {
-      // Já passou hoje, agenda para amanhã
-      horarioDesejado.setDate(horarioDesejado.getDate() + 1);
-    }
-
-    const tempoRestante = horarioDesejado - agora;
-
-    setTimeout(() => {
-      const frase = frases[Math.floor(Math.random() * frases.length)];
-      mostrarNotificacao(frase);
-
-      // Reagenda para o dia seguinte
-      agendarNotificacao();
-    }, tempoRestante);
-  }
-
-  function mostrarNotificacao(frase) {
-    if (Notification.permission === "granted") {
-      new Notification("🌻 Mensagem do Vinícius", {
-        body: frase,
-        icon: "https://cdn-icons-png.flaticon.com/512/766/766514.png"
-      });
-    }
-  }
-
-  // Solicita permissão quando a página é carregada
-  window.onload = () => {
-    if ("Notification" in window) {
-      Notification.requestPermission().then(permission => {
-        if (permission === "granted") {
-          agendarNotificacao();
-        }
-      });
-    }
-  };
+  
   </script>
 </body>
 </html>
