@@ -207,6 +207,69 @@
   100% { transform: rotate(1deg); }
 }
 
+#btn-fotos {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #ffd6e8;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: 'Comic Sans MS', cursive;
+}
+
+#carrossel {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-direction: row;
+}
+
+#carrossel.hidden {
+  display: none;
+}
+
+.polaroid {
+  background: #fff;
+  padding: 10px 10px 30px 10px;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  border-radius: 6px;
+  text-align: center;
+  max-width: 320px;
+  transition: all 0.6s ease-in-out;
+}
+
+.polaroid img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.legenda {
+  margin-top: 8px;
+  font-size: 16px;
+  font-family: 'Brush Script MT', cursive;
+  color: #555;
+}
+
+#carrossel button {
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+#carrossel button:hover {
+  transform: scale(1.2);
+}
+
+
+
   </style>
 </head>
 <body>
@@ -294,6 +357,20 @@
   </div>
 
   <div id="frase"></div>
+
+  <button id="btn-fotos">Ver fotos nossas 💕</button>
+
+<div id="carrossel" class="hidden">
+  <button id="prev">⬅️</button>
+  
+  <div class="polaroid">
+    <img id="foto" src="fotos/foto1.jpg" alt="Foto nossa" />
+    <div class="legenda">Vinícius ❤️ Sara</div>
+  </div>
+  
+  <button id="next">➡️</button>
+</div>
+
   
   <script>
     const dataInicio = new Date("2025-01-17");
@@ -373,6 +450,41 @@
   }
 
   window.onload = mostrarNomeGirassol;
+
+  const fotos = [
+    'fotos/3.png',
+    'fotos/4.png'
+  ];
+
+  let fotoAtual = 0;
+
+  const btnFotos = document.getElementById('btn-fotos');
+  const carrossel = document.getElementById('carrossel');
+  const img = document.getElementById('foto');
+  const prev = document.getElementById('prev');
+  const next = document.getElementById('next');
+
+  btnFotos.addEventListener('click', () => {
+    carrossel.classList.toggle('hidden');
+  });
+
+  function trocarFoto(index) {
+    img.style.opacity = 0;
+    setTimeout(() => {
+      img.src = fotos[index];
+      img.style.opacity = 1;
+    }, 300);
+  }
+
+  prev.addEventListener('click', () => {
+    fotoAtual = (fotoAtual - 1 + fotos.length) % fotos.length;
+    trocarFoto(fotoAtual);
+  });
+
+  next.addEventListener('click', () => {
+    fotoAtual = (fotoAtual + 1) % fotos.length;
+    trocarFoto(fotoAtual);
+  });
   </script>
 </body>
 </html>
