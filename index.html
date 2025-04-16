@@ -164,10 +164,7 @@
   margin-top: 30px;
 }
 
-#girassol-img {
-  width: 200px;
-  animation: balancar 3s ease-in-out infinite;
-}
+
 
 #plaquinha-nome {
   position: absolute;
@@ -187,8 +184,6 @@
   min-width: 70px;
   margin-top: 5px;
 }
-
-
 
 #cabinho {
   position: absolute;
@@ -293,8 +288,9 @@
     </div>
   </div>
 
-  <h2>Girassol Eterno</h2>
+  
   <div id="container">
+    <h2>Girassol Eterno</h2>
     <svg viewBox="0 0 200 300">
 
         <circle class="estrela" cx="20" cy="30" r="1" />
@@ -348,7 +344,6 @@
       </g>
     </svg>
 
-
   </div>
 
   
@@ -397,17 +392,13 @@
 
     const girassol = document.getElementById("girassol");
     girassol.setAttribute("transform", `translate(100,150) scale(${escala}) translate(-100,-150)`);
-    document.getElementById("contador-astro").textContent = `${diffDias} dias 🌻`;
-
+    document.getElementById("contador-astro").textContent = `${diffDias} dias`;
 
     const hora = hoje.getHours();
     const ceu = document.getElementById("ceu");
     const astro = document.getElementById("astro");
     const estrelas = document.querySelectorAll(".estrela");
     const passaros = document.getElementById("passaros");
-
-
-    
 
     const frases = [
     "Você é a luz que faz meu girassol florescer 🌻❤️",
@@ -512,6 +503,48 @@
     fotoAtual = (fotoAtual + 1) % fotos.length;
     trocarFoto(fotoAtual);
   });
+
+  function agendarNotificacao() {
+    const agora = new Date();
+    const horarioDesejado = new Date();
+
+    horarioDesejado.setHours(16, 13, 0, 0); // 16h30
+
+    if (agora > horarioDesejado) {
+      // Já passou hoje, agenda para amanhã
+      horarioDesejado.setDate(horarioDesejado.getDate() + 1);
+    }
+
+    const tempoRestante = horarioDesejado - agora;
+
+    setTimeout(() => {
+      const frase = frases[Math.floor(Math.random() * frases.length)];
+      mostrarNotificacao(frase);
+
+      // Reagenda para o dia seguinte
+      agendarNotificacao();
+    }, tempoRestante);
+  }
+
+  function mostrarNotificacao(frase) {
+    if (Notification.permission === "granted") {
+      new Notification("🌻 Mensagem do Vinícius", {
+        body: frase,
+        icon: "https://cdn-icons-png.flaticon.com/512/766/766514.png"
+      });
+    }
+  }
+
+  // Solicita permissão quando a página é carregada
+  window.onload = () => {
+    if ("Notification" in window) {
+      Notification.requestPermission().then(permission => {
+        if (permission === "granted") {
+          agendarNotificacao();
+        }
+      });
+    }
+  };
   </script>
 </body>
 </html>

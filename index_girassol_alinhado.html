@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌻 Girassol</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      color: white;
+      height: 100vh;
+      overflow-x: hidden;
+      font-size: 1rem;
+      padding: 0 1rem;
+      transition: background 1s ease;
+    }
+
+    #bloco-girassol {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #conteudo-girassol {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin: 0;
+      padding-top: 1.5rem;
+      font-family: 'Comic Sans MS', cursive;
+      color: #FFD700;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    svg {
+      width: 60vw;
+      height: auto;
+      max-width: 300px;
+    }
+
+    #girassol {
+      transform-origin: center bottom;
+      animation: balanco 3s ease-in-out infinite;
+      border: 4px solid rgba(255, 223, 0, 0.5);
+      border-radius: 50%;
+      box-shadow: 0 0 15px 5px rgba(255, 223, 0, 0.3);
+    }
+
+    @keyframes balanco {
+      0%, 100% { transform: rotate(1deg); }
+      50% { transform: rotate(-1deg); }
+    }
+
+    #plaquinha-nome {
+      background-color: #6a4f2d;
+      padding: 10px 15px;
+      border: 2px solid #050505;
+      border-radius: 10px;
+      font-family: 'Comic Sans MS', cursive;
+      font-weight: bold;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+      text-align: center;
+      font-size: 1.2em;
+      min-width: 70px;
+      position: relative;
+      display: none;
+    }
+
+    #cabinho {
+      width: 4px;
+      height: 40px;
+      background-color: #6a4f2d;
+      margin: 0 auto;
+      margin-top: 4px;
+      border-radius: 2px;
+    }
+
+    #ceu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      background: linear-gradient(#87CEEB, #ffffff);
+      transition: background 1s ease;
+    }
+
+    #astro {
+      position: absolute;
+      top: 5vh;
+      left: 5vw;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: yellow;
+      box-shadow: 0 0 30px 10px rgba(255, 255, 0, 0.4);
+      transition: background 1s ease, box-shadow 1s ease;
+    }
+
+    #contador-astro {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 0.8rem;
+      font-weight: bold;
+      color: black;
+      text-align: center;
+      pointer-events: none;
+      font-family: 'Comic Sans MS', cursive;
+      text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <div id="ceu"><div id="astro"><div id="contador-astro"></div></div></div>
+
+  <div id="container">
+    <div id="bloco-girassol">
+      <h2>🌻 Girassol Eterno</h2>
+      <div id="conteudo-girassol">
+        <svg viewBox="0 0 200 300">
+          <g id="girassol">
+            <path d="M100 140 C 98 180, 102 220, 100 270" stroke="green" stroke-width="10" fill="none" />
+            <ellipse cx="80" cy="200" rx="20" ry="10" fill="limegreen" />
+            <ellipse cx="120" cy="220" rx="20" ry="10" fill="limegreen" />
+
+            <circle cx="100" cy="100" r="40" fill="gold" />
+            <circle cx="100" cy="60" r="20" fill="gold" />
+            <circle cx="130" cy="70" r="20" fill="gold" />
+            <circle cx="140" cy="100" r="20" fill="gold" />
+            <circle cx="130" cy="130" r="20" fill="gold" />
+            <circle cx="100" cy="140" r="20" fill="gold" />
+            <circle cx="70" cy="130" r="20" fill="gold" />
+            <circle cx="60" cy="100" r="20" fill="gold" />
+            <circle cx="70" cy="70" r="20" fill="gold" />
+
+            <circle cx="100" cy="100" r="20" fill="#4B2E2E" />
+          </g>
+        </svg>
+
+        <div id="plaquinha-nome">
+          <span id="nome-girassol"></span>
+          <div id="cabinho"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const dataInicio = new Date("2025-01-17");
+    const hoje = new Date();
+    const diffDias = Math.floor((hoje - dataInicio) / (1000 * 60 * 60 * 24));
+
+    document.getElementById("contador-astro").textContent = `${diffDias} dias 🌻`;
+
+    const hora = hoje.getHours();
+    const ceu = document.getElementById("ceu");
+    const astro = document.getElementById("astro");
+    const contador = document.getElementById("contador-astro");
+
+    if (hora >= 6 && hora < 17) {
+      ceu.style.background = "linear-gradient(to top, #87ceeb, #fefbd8)";
+      astro.style.background = "yellow";
+      contador.style.color = "black";
+    } else if (hora >= 17 && hora < 18) {
+      ceu.style.background = "linear-gradient(to bottom, #FFA07A, #FFDAB9)";
+      astro.style.background = "orange";
+      contador.style.color = "black";
+    } else {
+      ceu.style.background = "linear-gradient(to top, #0b0c2a, #000)";
+      astro.style.background = "white";
+      contador.style.color = "white";
+    }
+
+    function salvarNome() {
+      const nome = document.getElementById("nome-plantinha").value.trim();
+      if (nome) {
+        localStorage.setItem("nomeGirassol", nome);
+        mostrarNomeGirassol();
+      }
+    }
+
+    function mostrarNomeGirassol() {
+      const nomeSalvo = localStorage.getItem("nomeGirassol");
+      if (nomeSalvo) {
+        const nomeSpan = document.getElementById("nome-girassol");
+        nomeSpan.innerText = nomeSalvo;
+        document.getElementById("plaquinha-nome").style.display = "block";
+      }
+    }
+
+    window.onload = mostrarNomeGirassol;
+  </script>
+</body>
+</html>
