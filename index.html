@@ -41,6 +41,9 @@
     #girassol {
       transform-origin: center bottom;
       animation: balanco 3s ease-in-out infinite;
+      border: 4px solid rgba(255, 223, 0, 0.5);
+      border-radius: 50%;
+      box-shadow: 0 0 15px 5px rgba(255, 223, 0, 0.3);
     }
 
     #gramado-container {
@@ -145,6 +148,17 @@
         font-size: 1.3rem;
       }
     }
+
+    @keyframes folhaBalanço {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(2deg); }
+    }
+    ellipse {
+    transform-origin: center;
+    animation: folhaBalanço 4s ease-in-out infinite;
+    }
+
+    
   </style>
 </head>
 <body>
@@ -170,23 +184,32 @@
         <circle class="estrela" cx="90" cy="120" r="1.2" />
 
       <g id="girassol">
-        <rect x="95" y="140" width="10" height="130" fill="green" />
+        <path d="M100 140 C 98 180, 102 220, 100 270" stroke="green" stroke-width="10" fill="none" />
         <ellipse cx="80" cy="200" rx="20" ry="10" fill="limegreen" />
         <ellipse cx="120" cy="220" rx="20" ry="10" fill="limegreen" />
 
         <g id="petalas">
-          <circle cx="100" cy="100" r="40" fill="gold" />
-          <circle cx="100" cy="60" r="20" fill="gold" />
-          <circle cx="130" cy="70" r="20" fill="gold" />
-          <circle cx="140" cy="100" r="20" fill="gold" />
-          <circle cx="130" cy="130" r="20" fill="gold" />
-          <circle cx="100" cy="140" r="20" fill="gold" />
-          <circle cx="70" cy="130" r="20" fill="gold" />
-          <circle cx="60" cy="100" r="20" fill="gold" />
-          <circle cx="70" cy="70" r="20" fill="gold" />
-        </g>
+            <defs>
+                <radialGradient id="petalaGrad" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#FFD700"/>
+                  <stop offset="100%" stop-color="goldenrod"/>
+                </radialGradient>
+              </defs>
+              
+          <circle cx="100" cy="100" r="40" fill="url(#petalaGrad)" />
+          <circle cx="100" cy="60" r="20" fill="url(#petalaGrad)" />
+          <circle cx="130" cy="70" r="20" fill="url(#petalaGrad)" />
+          <circle cx="140" cy="100" r="20" fill="url(#petalaGrad)" />
+          <circle cx="130" cy="130" r="20" fill="url(#petalaGrad)" />
+          <circle cx="100" cy="140" r="20" fill="url(#petalaGrad)" />
+          <circle cx="70" cy="130" r="20" fill="url(#petalaGrad)" />
+          <circle cx="60" cy="100" r="20" fill="url(#petalaGrad)" />
+          <circle cx="70" cy="70" r="20" fill="url(#petalaGrad)" />
+          
 
-        <circle cx="100" cy="100" r="20" fill="saddlebrown" />
+        </g>
+        
+        <circle cx="100" cy="100" r="20" fill="#4B2E2E" />
         <circle id="sol" r="20" fill="gold" style="display:none;" />
         <circle id="lua" r="15" fill="#ccc" style="display:none;" />
 
