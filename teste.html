@@ -1,156 +1,276 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Girassol de 3 Meses 🌻</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌻 Girassol</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to top, #87ceeb, #ffffff);
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      color: white;
+      height: 100vh;
       overflow-x: hidden;
+      font-size: 1rem;
+      padding: 0 1rem;
       transition: background 1s ease;
     }
 
-    body.night {
-      background: linear-gradient(to top, #0d1b2a, #1b263b);
+    h2 {
+      font-size: 1.6rem;
+      padding-top: 2rem;
+      margin: 0;
+      word-wrap: break-word;
+      max-width: 90vw;
     }
 
-    #toggle-mode {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      padding: 10px 20px;
-      background-color: #fdd835;
-      border: none;
-      border-radius: 20px;
-      font-size: 1rem;
-      cursor: pointer;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-      transition: background 0.3s ease;
-    }
-
-    #toggle-mode:hover {
-      background-color: #ffe066;
-    }
-
-    .container {
+    #container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-end;
-      height: 100vh;
-      padding-bottom: 100px;
-      position: relative;
     }
 
-    .sunflower {
-      width: 150px;
-      height: 150px;
-      background: radial-gradient(circle, #6b3e26 20%, #f9a825 21%);
-      border-radius: 50%;
-      position: relative;
-      cursor: pointer;
-      transition: transform 0.3s ease;
+    svg {
+      width: 60vw;
+      height: auto;
+      max-width: 300px;
+      margin-top: 20px;
     }
 
-    .sunflower:hover {
-      transform: scale(1.1);
+    #girassol {
+      transform-origin: center bottom;
+      animation: balanco 3s ease-in-out infinite;
     }
 
-    .petal {
-      width: 60px;
-      height: 20px;
-      background-color: #ffeb3b;
-      border-radius: 10px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform-origin: center;
+    #gramado-container {
+    position: relative;
+    width: 100%;
+    height: 80px;
+    margin-top: -120px;
+    z-index: 1;
     }
 
-    .ground {
-      width: 100%;
-      height: 80px;
-      background-color: #7cfc00;
-      position: absolute;
-      bottom: 0;
+    #gramado {
+    width: 100%;
+    height: 100%;
+    }
+
+
+    @keyframes balanco {
+      0%, 100% { transform: rotate(1deg); }
+      50% { transform: rotate(-1deg); }
+    }
+
+    #dias {
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #FFD700; /* Cor dourada para destacar */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Sombra para dar destaque */
+    animation: fadeIn 2s ease-in-out; /* Animação de aparecimento */
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.6); /* Fundo escuro e transparente */
+    border-radius: 10px;
+    }
+
+    @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+    }
+
+    #ceu {
+      position: fixed;
+      top: 0;
       left: 0;
+      width: 100vw;
+      height: 100vh;
       z-index: -1;
+      background: linear-gradient(#87CEEB, #ffffff);
       transition: background 1s ease;
     }
 
-    body.night .ground {
-      background-color: #355e3b;
+    #astro {
+      position: absolute;
+      top: 5vh;
+      left: 5vw;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: yellow;
+      box-shadow: 0 0 30px 10px rgba(255, 255, 0, 0.4);
+      transition: background 1s ease, box-shadow 1s ease;
     }
 
-    .phrase {
-      margin-top: 40px;
-      font-size: 1.6rem;
-      text-align: center;
-      color: #333;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.8);
-      border-radius: 20px;
-      max-width: 90%;
-      transition: all 0.5s ease;
+    #frase {
+    font-family: 'Cursive', 'Segoe Script', 'Dancing Script', sans-serif;
+    font-size: 28px;
+    text-align: center;
+    color: #ffffff;
+    margin-top: 30px;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 1.5s ease, transform 1.5s ease;
     }
 
-    body.night .phrase {
-      background: rgba(255, 255, 255, 0.1);
-      color: #f1f1f1;
-      backdrop-filter: blur(4px);
+    .estrela {
+      fill: white;
+      opacity: 0;
+      animation: piscar 5s infinite;
+    }
+
+    @keyframes piscar {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 0.8; }
+    }
+
+    .passaro {
+      animation: voar 20s linear infinite;
+    }
+
+    @keyframes voar {
+      0% { transform: translateX(-100px) translateY(0); }
+      100% { transform: translateX(110vw) translateY(-20px); }
+    }
+
+    @media (max-width: 500px) {
+      #dias {
+        font-size: 1rem;
+        bottom: 20px;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+      }
     }
   </style>
 </head>
 <body>
-  <button id="toggle-mode">🌙 Alternar para noite</button>
-  <div class="container">
-    <div class="sunflower" id="sunflower"></div>
-    <div class="ground"></div>
-    <div class="phrase" id="phrase"></div>
+  <div id="ceu"><div id="astro"></div></div>
+
+  <h2>Girassol Eterno</h2>
+  <div id="container">
+    <svg viewBox="0 0 200 300">
+
+        <circle class="estrela" cx="20" cy="30" r="1" />
+        <circle class="estrela" cx="160" cy="60" r="1.5" />
+        <circle class="estrela" cx="90" cy="50" r="1.2" />
+        <circle class="estrela" cx="120" cy="20" r="1" />
+        <circle class="estrela" cx="30" cy="90" r="1.2" />
+        <circle class="estrela" cx="50" cy="20" r="1" />
+        <circle class="estrela" cx="70" cy="60" r="1.3" />
+        <circle class="estrela" cx="110" cy="90" r="1.5" />
+        <circle class="estrela" cx="150" cy="110" r="1.1" />
+        <circle class="estrela" cx="170" cy="30" r="1" />
+        <circle class="estrela" cx="180" cy="80" r="1.4" />
+        <circle class="estrela" cx="60" cy="110" r="1" />
+        <circle class="estrela" cx="40" cy="70" r="1.3" />
+        <circle class="estrela" cx="90" cy="120" r="1.2" />
+
+      <g id="girassol">
+        <rect x="95" y="140" width="10" height="130" fill="green" />
+        <ellipse cx="80" cy="200" rx="20" ry="10" fill="limegreen" />
+        <ellipse cx="120" cy="220" rx="20" ry="10" fill="limegreen" />
+
+        <g id="petalas">
+          <circle cx="100" cy="100" r="40" fill="gold" />
+          <circle cx="100" cy="60" r="20" fill="gold" />
+          <circle cx="130" cy="70" r="20" fill="gold" />
+          <circle cx="140" cy="100" r="20" fill="gold" />
+          <circle cx="130" cy="130" r="20" fill="gold" />
+          <circle cx="100" cy="140" r="20" fill="gold" />
+          <circle cx="70" cy="130" r="20" fill="gold" />
+          <circle cx="60" cy="100" r="20" fill="gold" />
+          <circle cx="70" cy="70" r="20" fill="gold" />
+        </g>
+
+        <circle cx="100" cy="100" r="20" fill="saddlebrown" />
+        <circle id="sol" r="20" fill="gold" style="display:none;" />
+        <circle id="lua" r="15" fill="#ccc" style="display:none;" />
+
+        
+
+        <g id="passaros" style="display:none;">
+          <path d="M10 10 Q 15 5, 20 10" fill="none" stroke="white" stroke-width="1" class="passaro" />
+          <path d="M30 20 Q 35 15, 40 20" fill="none" stroke="white" stroke-width="1" class="passaro" />
+        </g>
+      </g>
+    </svg>
+
+    <div id="dias"></div>
+    
+
   </div>
 
+  <div id="gramado-container">
+    <svg id="gramado" viewBox="0 0 100 20" preserveAspectRatio="none">
+      <path d="M0 10 Q 25 0, 50 10 T 100 10 V20 H0 Z" fill="limegreen"/>
+    </svg>
+  </div>
+
+  <div id="frase"></div>
+  
   <script>
-    const sunflower = document.getElementById('sunflower');
-    const phraseBox = document.getElementById('phrase');
-    const toggleBtn = document.getElementById('toggle-mode');
-    const body = document.body;
+    const dataInicio = new Date("2025-01-17");
+    const hoje = new Date();
+    const diffDias = Math.floor((hoje - dataInicio) / (1000 * 60 * 60 * 24));
+    const escala = Math.min(1 + diffDias * 0.01, 2.5);
 
-    const phrases = [
-      "Te amo a cada raio de sol que toca essa flor 🌻",
-      "Com você, cada dia floresce mais bonito. 💛",
-      "Nosso amor é como esse girassol: sempre seguindo a luz ☀️",
-      "3 meses e contando... para sempre 🌻✨",
-      "Você é o meu sol, minha luz, minha flor 🌞🌻"
-    ];
+    const girassol = document.getElementById("girassol");
+    girassol.setAttribute("transform", `translate(100,150) scale(${escala}) translate(-100,-150)`);
+    document.getElementById("dias").textContent = `✨ ${diffDias} dias ao lado do amor da minha vida ✨`;
 
-    // Adiciona pétalas
-    const sunflowerDiv = document.getElementById("sunflower");
-    for (let i = 0; i < 20; i++) {
-      const petal = document.createElement("div");
-      petal.classList.add("petal");
-      petal.style.transform = `translate(-50%, -50%) rotate(${i * (360 / 20)}deg) translateY(-75px)`;
-      sunflowerDiv.appendChild(petal);
+    const hora = hoje.getHours();
+    const ceu = document.getElementById("ceu");
+    const astro = document.getElementById("astro");
+    const estrelas = document.querySelectorAll(".estrela");
+    const passaros = document.getElementById("passaros");
+
+    if (hora >= 6 && hora < 17) {
+      ceu.style.background = "linear-gradient(to top, #87ceeb, #fefbd8)";
+      astro.style.background = "yellow";
+      astro.style.boxShadow = "0 0 30px 10px rgba(255,255,0,0.4)";
+      estrelas.forEach(e => e.style.display = "none");
+      passaros.style.display = "block";
+    } else if (hora >= 17 && hora < 18) {
+      ceu.style.background = "linear-gradient(to bottom, #FFA07A, #FFDAB9)";
+      astro.style.background = "orange";
+      astro.style.boxShadow = "0 0 40px 10px rgba(255,165,0,0.3)";
+      estrelas.forEach(e => e.style.display = "none");
+      passaros.style.display = "block";
+    } else {
+      ceu.style.background = "linear-gradient(to top, #0b0c2a, #000)";
+      astro.style.background = "white";
+      astro.style.boxShadow = "0 0 30px 10px rgba(255,255,255,0.3)";
+      estrelas.forEach(e => e.style.display = "block");
+      passaros.style.display = "none";
     }
 
-    // Clique no girassol
-    sunflower.addEventListener('click', () => {
-      const random = Math.floor(Math.random() * phrases.length);
-      phraseBox.textContent = phrases[random];
+    const frases = [
+    "Você é a luz que faz meu girassol florescer 🌻❤️",
+    "Estar com você é como estar sempre na primavera 🌸✨",
+    "Te amar é como um raio de sol em dia nublado ☀️💕",
+    "Com você, todos os dias têm cor e calor 🌞💛",
+    "Você me faz crescer, como o sol faz com as flores 🌻🌞",
+    "Te amo mais do que palavras podem dizer 💌🌼"
+    ];
+
+    let indiceFrase = 0;
+
+    const Girassol = document.getElementById("flower");
+    const frase = document.getElementById("frase");
+
+    girassol.addEventListener("click", () => {
+    frase.textContent = frases[indiceFrase];
+    frase.style.opacity = 1;
+    frase.style.transform = "scale(1)";
+
+    // Avança para a próxima frase ou volta ao início
+    indiceFrase = (indiceFrase + 1) % frases.length;
     });
 
-    // Alternar modo
-    toggleBtn.addEventListener('click', () => {
-      body.classList.toggle('night');
-      if (body.classList.contains('night')) {
-        toggleBtn.textContent = '☀️ Voltar para o dia';
-      } else {
-        toggleBtn.textContent = '🌙 Alternar para noite';
-      }
-    });
   </script>
 </body>
 </html>

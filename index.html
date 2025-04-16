@@ -63,10 +63,22 @@
     }
 
     #dias {
-      position: absolute;
-      bottom: 30px;
-      width: 100%;
-      font-size: 1.2rem;
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #FFD700; /* Cor dourada para destacar */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Sombra para dar destaque */
+    animation: fadeIn 2s ease-in-out; /* Animação de aparecimento */
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.6); /* Fundo escuro e transparente */
+    border-radius: 10px;
+    }
+
+    @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
     }
 
     #ceu {
@@ -208,7 +220,7 @@
 
     const girassol = document.getElementById("girassol");
     girassol.setAttribute("transform", `translate(100,150) scale(${escala}) translate(-100,-150)`);
-    document.getElementById("dias").textContent = `✨ ${diffDias} dias ao lado da minha flor favorita ✨`;
+    document.getElementById("dias").textContent = `✨ ${diffDias} dias ao lado do amor da minha vida ✨`;
 
     const hora = hoje.getHours();
     const ceu = document.getElementById("ceu");
