@@ -92,6 +92,17 @@
       transition: background 1s ease, box-shadow 1s ease;
     }
 
+    #frase {
+    font-family: 'Cursive', 'Segoe Script', 'Dancing Script', sans-serif;
+    font-size: 28px;
+    text-align: center;
+    color: #D94F4F;
+    margin-top: 30px;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 1.5s ease, transform 1.5s ease;
+    }
+
     .estrela {
       fill: white;
       opacity: 0;
@@ -177,6 +188,8 @@
     </svg>
 
     <div id="dias"></div>
+    
+
   </div>
 
   <div id="gramado-container">
@@ -184,8 +197,9 @@
       <path d="M0 10 Q 25 0, 50 10 T 100 10 V20 H0 Z" fill="limegreen"/>
     </svg>
   </div>
-  
 
+  <div id="frase"></div>
+  
   <script>
     const dataInicio = new Date("2025-01-17");
     const hoje = new Date();
@@ -222,6 +236,28 @@
       passaros.style.display = "none";
     }
 
+    const frases = [
+    "Você é a luz que faz meu girassol florescer 🌻❤️",
+    "Estar com você é como estar sempre na primavera 🌸✨",
+    "Te amar é como um raio de sol em dia nublado ☀️💕",
+    "Com você, todos os dias têm cor e calor 🌞💛",
+    "Você me faz crescer, como o sol faz com as flores 🌻🌞",
+    "Te amo mais do que palavras podem dizer 💌🌼"
+    ];
+
+    let indiceFrase = 0;
+
+    const Girassol = document.getElementById("flower");
+    const frase = document.getElementById("frase");
+
+    girassol.addEventListener("click", () => {
+    frase.textContent = frases[indiceFrase];
+    frase.style.opacity = 1;
+    frase.style.transform = "scale(1)";
+
+    // Avança para a próxima frase ou volta ao início
+    indiceFrase = (indiceFrase + 1) % frases.length;
+    });
 
   </script>
 </body>
