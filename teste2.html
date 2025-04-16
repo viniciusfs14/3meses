@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>🌻 Nosso Girassol 🌻</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(to bottom, midnightblue, #001d3d, #003566);
+      color: white;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      text-align: center;
+    }
+
+    #estrelas {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .estrela {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: piscar 2s infinite alternate;
+    }
+
+    @keyframes piscar {
+      0% { opacity: 0.2; }
+      100% { opacity: 1; }
+    }
+
+    h1 {
+      margin-top: 40px;
+      font-size: 2em;
+    }
+
+    #campo-de-girassois {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: end;
+      min-height: 300px;
+      margin-top: 30px;
+      padding-bottom: 100px;
+    }
+
+    .gramado {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 100px;
+      background: linear-gradient(to top, green 30%, #228B22 90%);
+      z-index: -1;
+    }
+
+    svg {
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="estrelas"></div>
+  <h1 id="dias">✨ ... ✨</h1>
+  <div id="campo-de-girassois"></div>
+  <div class="gramado"></div>
+
+  <script>
+    // Criar estrelas aleatórias
+    const estrelasContainer = document.getElementById("estrelas");
+    for (let i = 0; i < 150; i++) {
+      const estrela = document.createElement("div");
+      estrela.className = "estrela";
+      estrela.style.top = Math.random() * 100 + "%";
+      estrela.style.left = Math.random() * 100 + "%";
+      estrela.style.animationDelay = Math.random() * 2 + "s";
+      estrela.style.width = estrela.style.height = Math.random() * 2 + 1 + "px";
+      estrelasContainer.appendChild(estrela);
+    }
+
+    const campo = document.getElementById("campo-de-girassois");
+    const dataInicio = new Date("2025-04-14");
+    const hoje = new Date();
+    const diffDias = Math.floor((hoje - dataInicio) / (1000 * 60 * 60 * 24));
+    document.getElementById("dias").textContent = `✨ ${diffDias} dias ao lado da minha flor favorita ✨`;
+
+    for (let i = 0; i <= diffDias; i++) {
+      const escala = Math.max(0.5, 1 + (diffDias - i) * 0.02); // maior pro atual, menor pros antigos
+      const girassol = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      girassol.setAttribute("viewBox", "0 0 200 300");
+      girassol.setAttribute("width", 100 * escala);
+      girassol.setAttribute("height", 150 * escala);
+
+      girassol.innerHTML = `
+        <g transform="translate(100,150) scale(${escala}) translate(-100,-150)">
+          <rect x="95" y="140" width="10" height="130" fill="green" />
+          <ellipse cx="80" cy="200" rx="20" ry="10" fill="limegreen" />
+          <ellipse cx="120" cy="220" rx="20" ry="10" fill="limegreen" />
+          <circle cx="100" cy="100" r="40" fill="gold" />
+          <circle cx="100" cy="60" r="20" fill="gold" />
+          <circle cx="130" cy="70" r="20" fill="gold" />
+          <circle cx="140" cy="100" r="20" fill="gold" />
+          <circle cx="130" cy="130" r="20" fill="gold" />
+          <circle cx="100" cy="140" r="20" fill="gold" />
+          <circle cx="70" cy="130" r="20" fill="gold" />
+          <circle cx="60" cy="100" r="20" fill="gold" />
+          <circle cx="70" cy="70" r="20" fill="gold" />
+          <circle cx="100" cy="100" r="20" fill="saddlebrown" />
+        </g>
+      `;
+
+      campo.appendChild(girassol);
+    }
+  </script>
+</body>
+</html>
