@@ -382,17 +382,16 @@ h2 {
     <img src="fotos/icon.png" alt="Ícone" width="16" height="16">
   </button>
 
-<div id="carrossel" class="hidden">
-  <button id="prev">⬅️</button>
-  
-  <div class="polaroid">
-    <img id="foto" src="fotos/eu.jpg" alt="Foto nossa" />
-    <div class="legenda">Nosso álbum de fotos</div>
+  <div id="carrossel" class="hidden">
+    <button id="prev">⬅️</button>
+    
+    <div class="polaroid">
+      <img id="foto" src="fotos/eu.jpg" alt="Foto nossa" />
+      <div id="legenda" class="legenda">Nosso álbum de fotos</div> <!-- Atualizando a div da legenda -->
+    </div>
+    
+    <button id="next">➡️</button>
   </div>
-  
-  <button id="next">➡️</button>
-  
-</div>
 
 <audio id="musica" src="audio/music.mp3"></audio>
 
@@ -425,7 +424,7 @@ h2 {
     "Eu te amo porque, no seu olhar, encontro paz e amor...",
     "Eu te amo porque você me faz sentir especial só por estar ao seu lado...",
     "Eu te beijaria mesmo se você estivesse doente, sabendo que eu também ficaria doente...",
-    ""
+    "Você não precisa fazer nada pra merecer o meu amor... ele já é todinho seu meu bem"
     ];
 
     let indiceFrase = 0;
@@ -501,9 +500,20 @@ h2 {
     'fotos/união.jpeg',
     'fotos/melhordia.jpeg',
     'fotos/desenho.jpeg',
-    'fotos/helloeeu',
-    'fotos/linda'
+    'fotos/helloeeu.jpeg',
+    'fotos/linda.jpeg'
   ];
+
+  const legendas = [
+  'Eu e você no estilo studios ghibli',
+  'Meu sonho é recriar essa foto com você um dia...',
+  'Eu e a kitty te amamos, sabia?',
+  'A dupla café com leite',
+  'O melhor dia da minha vida haha',
+  'Um dos primeiros desenhos que eu fiz para você',
+  'Eu e o primeiro presente que eu te dei hahaha, a famosa pelúcia da kitty',
+  'Minha foto favorita'
+];
 
   let fotoAtual = 0;
 
@@ -512,6 +522,7 @@ h2 {
   const img = document.getElementById('foto');
   const prev = document.getElementById('prev');
   const next = document.getElementById('next');
+  const legenda = document.getElementById('legenda');
 
   btnFotos.addEventListener('click', () => {
     carrossel.classList.toggle('hidden');
@@ -521,6 +532,7 @@ h2 {
     img.style.opacity = 0;
     setTimeout(() => {
       img.src = fotos[index];
+      legenda.textContent = legendas[index];
       img.style.opacity = 1;
     }, 300);
   }
