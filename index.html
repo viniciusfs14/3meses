@@ -158,6 +158,65 @@
     animation: folhaBalanço 4s ease-in-out infinite;
     }
 
+    #plantinha-container {
+  position: relative;
+  display: inline-block;
+  margin-top: 30px;
+}
+
+#girassol-img {
+  width: 200px;
+  animation: balancar 3s ease-in-out infinite;
+}
+
+#plaquinha-nome {
+  position: absolute;
+  top: -170px;
+  left: 130%;
+  transform: translateX(-50%);
+  background-color: #6a4f2d;
+  padding: 10px 15px;
+  border: 2px solid #050505;
+  border-radius: 10px;
+  font-family: 'Comic Sans MS', cursive;
+  font-weight: bold;
+  display: none;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+  text-align: center;
+  font-size: 1.2em;
+  min-width: 150px;
+  margin-top: 5px;
+}
+
+#cabinho {
+  position: absolute;
+  width: 5px;
+  height: 80px;
+  background-color: #6a4f2d; /* Cor do cabinho (madeira) */
+  bottom: 55px; /* Ajuste para que fique fixo ao "chão" */
+  left: 130%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+#plaquinha-nome:before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 20px;
+  background-color: #d4a017;
+}
+
+@keyframes balancar {
+  0% { transform: rotate(1deg); }
+  50% { transform: rotate(-2deg); }
+  100% { transform: rotate(1deg); }
+}
+
+
     
   </style>
 </head>
@@ -206,14 +265,11 @@
           <circle cx="60" cy="100" r="20" fill="url(#petalaGrad)" />
           <circle cx="70" cy="70" r="20" fill="url(#petalaGrad)" />
           
-
         </g>
         
         <circle cx="100" cy="100" r="20" fill="#4B2E2E" />
         <circle id="sol" r="20" fill="gold" style="display:none;" />
         <circle id="lua" r="15" fill="#ccc" style="display:none;" />
-
-        
 
         <g id="passaros" style="display:none;">
           <path d="M10 10 Q 15 5, 20 10" fill="none" stroke="white" stroke-width="1" class="passaro" />
@@ -227,10 +283,27 @@
 
   </div>
 
+  
+  
+
   <div id="gramado-container">
     <svg id="gramado" viewBox="0 0 100 20" preserveAspectRatio="none">
       <path d="M0 10 Q 25 0, 50 10 T 100 10 V20 H0 Z" fill="limegreen"/>
     </svg>
+  </div>
+
+  <div id="plantinha-container">
+    <div id="plaquinha-nome">
+      <span id="nome-girassol"></span>
+    </div>
+    <img id="girassol-img" src="girassol_animado.gif" alt="Plantinha do Amor">
+    <div id="cabinho"></div> <!-- Cabinho fixo no chão -->
+  </div>
+  
+  <div id="nome-plantinha-container">
+    <label for="nome-plantinha">Dê um nome ao seu girassol 🌻:</label><br>
+    <input type="text" id="nome-plantinha" placeholder="Ex: Girassolzinho" />
+    <button onclick="salvarNome()">Salvar</button>
   </div>
 
   <div id="frase"></div>
@@ -294,6 +367,25 @@
     indiceFrase = (indiceFrase + 1) % frases.length;
     });
 
+    function salvarNome() {
+    const nome = document.getElementById("nome-plantinha").value.trim();
+    if (nome) {
+      localStorage.setItem("nomeGirassol", nome);
+      mostrarNomeGirassol();
+    }
+  }
+
+  function mostrarNomeGirassol() {
+    const nomeSalvo = localStorage.getItem("nomeGirassol");
+    if (nomeSalvo) {
+      document.getElementById("nome-plantinha-container").style.display = "none";
+      const nomeSpan = document.getElementById("nome-girassol");
+      nomeSpan.innerText = nomeSalvo;
+      document.getElementById("plaquinha-nome").style.display = "block";
+    }
+  }
+
+  window.onload = mostrarNomeGirassol;
   </script>
 </body>
 </html>
