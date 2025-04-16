@@ -378,14 +378,16 @@ h2 {
 
   <div id="frase"></div>
 
-  <button id="btn-fotos">Ver fotos nossas 💕</button>
+  <button id="btn-fotos">
+    <img src="fotos/icon.png" alt="Ícone" width="16" height="16">
+  </button>
 
 <div id="carrossel" class="hidden">
   <button id="prev">⬅️</button>
   
   <div class="polaroid">
-    <img id="foto" src="fotos/foto1.jpg" alt="Foto nossa" />
-    <div class="legenda">Vinícius ❤️ Sara</div>
+    <img id="foto" src="fotos/eu.jpg" alt="Foto nossa" />
+    <div class="legenda">Nosso álbum de fotos</div>
   </div>
   
   <button id="next">➡️</button>
@@ -480,7 +482,8 @@ h2 {
 
   const fotos = [
     'fotos/3.png',
-    'fotos/4.png'
+    'fotos/4.png',
+    'fotos/eu.jpeg'
   ];
 
   let fotoAtual = 0;
