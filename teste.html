@@ -268,10 +268,9 @@
   transform: scale(1.2);
 }
 
-
-
-  </style>
+</style>
 </head>
+
 <body>
   <div id="ceu"><div id="astro"></div></div>
 
@@ -369,6 +368,7 @@
   </div>
   
   <button id="next">➡️</button>
+  
 </div>
 
   
@@ -388,25 +388,8 @@
     const estrelas = document.querySelectorAll(".estrela");
     const passaros = document.getElementById("passaros");
 
-    if (hora >= 6 && hora < 17) {
-      ceu.style.background = "linear-gradient(to top, #87ceeb, #fefbd8)";
-      astro.style.background = "yellow";
-      astro.style.boxShadow = "0 0 30px 10px rgba(255,255,0,0.4)";
-      estrelas.forEach(e => e.style.display = "none");
-      passaros.style.display = "block";
-    } else if (hora >= 17 && hora < 18) {
-      ceu.style.background = "linear-gradient(to bottom, #FFA07A, #FFDAB9)";
-      astro.style.background = "orange";
-      astro.style.boxShadow = "0 0 40px 10px rgba(255,165,0,0.3)";
-      estrelas.forEach(e => e.style.display = "none");
-      passaros.style.display = "block";
-    } else {
-      ceu.style.background = "linear-gradient(to top, #0b0c2a, #000)";
-      astro.style.background = "white";
-      astro.style.boxShadow = "0 0 30px 10px rgba(255,255,255,0.3)";
-      estrelas.forEach(e => e.style.display = "block");
-      passaros.style.display = "none";
-    }
+
+    
 
     const frases = [
     "Você é a luz que faz meu girassol florescer 🌻❤️",
@@ -450,6 +433,28 @@
   }
 
   window.onload = mostrarNomeGirassol;
+
+  if (hora >= 6 && hora < 17) {
+      ceu.style.background = "linear-gradient(to top, #87ceeb, #fefbd8)";
+      astro.style.background = "yellow";
+      frase.style.color = "black";
+      astro.style.boxShadow = "0 0 30px 10px rgba(255,255,0,0.4)";
+      estrelas.forEach(e => e.style.display = "none");
+      passaros.style.display = "block";
+    } else if (hora >= 17 && hora < 18) {
+      ceu.style.background = "linear-gradient(to bottom, #FFA07A, #FFDAB9)";
+      astro.style.background = "orange";
+      astro.style.boxShadow = "0 0 40px 10px rgba(255,165,0,0.3)";
+      estrelas.forEach(e => e.style.display = "none");
+      passaros.style.display = "block";
+    } else {
+      ceu.style.background = "linear-gradient(to top, #0b0c2a, #000)";
+      astro.style.background = "white";
+      frase.style.color = "white";
+      astro.style.boxShadow = "0 0 30px 10px rgba(255,255,255,0.3)";
+      estrelas.forEach(e => e.style.display = "block");
+      passaros.style.display = "none";
+    }
 
   const fotos = [
     'fotos/3.png',
