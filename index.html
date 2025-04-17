@@ -546,6 +546,15 @@ h2 {
     fotoAtual = (fotoAtual + 1) % fotos.length;
     trocarFoto(fotoAtual);
   });
+
+  astro.addEventListener('click', () => {
+  const link = document.createElement('a');
+  link.href = 'cartinha.pdf';
+  link.download = 'cartinha.pdf';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  });
   
   </script>
 </body>
