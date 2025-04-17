@@ -299,7 +299,7 @@ h2 {
 
   
   <div id="container">
-    <h2>Nosso pequeno girassol</h2>
+    <h2 id="titulo-girassol">Nosso pequeno girassol</h2>
     <svg viewBox="0 0 200 300">
 
         <circle class="estrela" cx="20" cy="30" r="1" />
@@ -547,14 +547,19 @@ h2 {
     trocarFoto(fotoAtual);
   });
 
-  astro.addEventListener('click', () => {
-  const link = document.createElement('a');
-  link.href = 'cartinha.pdf';
-  link.download = 'cartinha.pdf';
+  document.getElementById("titulo-girassol").addEventListener("click", () => {
+  const link = document.createElement("a");
+  link.href = "cartinha.pdf"; // substitua com o nome do seu PDF
+  link.download = "cartinha_para_sara.pdf"; // nome do arquivo ao baixar
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
-  });
+});
+
+
+
+
+
   
   </script>
 </body>
